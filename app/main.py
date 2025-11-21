@@ -1,12 +1,14 @@
 from fastapi import FastAPI
-from app.database import Base, engine
+from app.database import Base
+from app.database import engine
 
-# ⚠️ IMPORTANT : importer les modèles avant create_all
+# IMPORTANT : importer les modèles avant create_all
 from app.models.user import User  # noqa: F401
 
 from app.routers import auth, users, zones, indicators, sources, stats
 
 Base.metadata.create_all(bind=engine)
+
 
 app = FastAPI(
     title="EcoTrack API",

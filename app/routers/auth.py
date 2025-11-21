@@ -17,7 +17,8 @@ def signup(user: UserCreate, db: Session = Depends(get_db)):
     new_user = User(
         email=user.email,
         hashed_password=hash_password(user.password),
-        role="user"
+        role="user",
+        is_active=True,
     )
     db.add(new_user)
     db.commit()
@@ -29,7 +30,10 @@ def signup(user: UserCreate, db: Session = Depends(get_db)):
 def login(user: UserLogin, db: Session = Depends(get_db)):
     db_user = db.query(User).filter(User.email == user.email).first()
     if not db_user or not verify_password(user.password, db_user.hashed_password):
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Identifiants invalides")
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Identifiants invalides"
+        )
 
     token = create_access_token({"sub": db_user.email, "role": db_user.role})
     return {"access_token": token, "token_type": "bearer"}
