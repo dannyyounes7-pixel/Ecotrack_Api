@@ -7,6 +7,29 @@ from app.schemas.user import UserCreate, UserLogin
 from app.core.security import hash_password, verify_password, create_access_token
 
 router = APIRouter()
+@router.post("/signup", status_code=201)
+def signup(user: UserCreate, db: Session = Depends(get_db)):
+    existing = db.query(User).filter(User.email == user.email).first()
+    if existing:
+        raise HTTPException(status_code=400, detail="Email déjà utilisé")
+
+    try:
+        hashed = hash_password(user.password)
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+    new_user = User(
+        email=user.email,
+        hashed_password=hashed,
+        role="user",
+        is_active=True
+    )
+    db.add(new_user)
+    db.commit()
+    db.refresh(new_user)
+
+    return {"message": "Utilisateur créé avec succès"}
+
 
 @router.post("/signup", status_code=201)
 def signup(user: UserCreate, db: Session = Depends(get_db)):
