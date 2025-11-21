@@ -6,6 +6,9 @@ from app.database import engine
 from app.models.user import User  # noqa: F401
 
 from app.routers import auth, users, zones, indicators, sources, stats
+from app.models.zone import Zone  # noqa: F401
+from app.models.source import Source  # noqa: F401
+from app.models.indicator import Indicator  # noqa: F401
 
 Base.metadata.create_all(bind=engine)
 from fastapi.security import OAuth2PasswordBearer
