@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from typing import Optional, Dict, Any
 from datetime import datetime
 
@@ -29,6 +29,8 @@ class IndicatorUpdate(BaseModel):
 
 class IndicatorOut(IndicatorBase):
     id: int
+    metadata: Optional[Dict[str, Any]] = Field(None, validation_alias='metadata_', serialization_alias='metadata')
 
     class Config:
         from_attributes = True
+        populate_by_name = True

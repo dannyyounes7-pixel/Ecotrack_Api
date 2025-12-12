@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoTrack - Suivi Environnemental</title>
+    <link rel="stylesheet" href="/frontend/css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+
+<body>
+    <!-- Page de Connexion/Inscription -->
+    <div id="auth-page" class="page active">
+        <div class="auth-container">
+            <div class="auth-card">
+                <h1>🌍 EcoTrack</h1>
+                <p class="subtitle">Suivi des Indicateurs Environnementaux</p>
+
+                <div class="auth-tabs">
+                    <button class="tab-btn active" data-tab="login">Connexion</button>
+                    <button class="tab-btn" data-tab="signup">Inscription</button>
+                </div>
+
+                <!-- Formulaire de Connexion -->
+                <form id="login-form" class="auth-form active">
+                    <div class="form-group">
+                        <label for="login-email">Email</label>
+                        <input type="email" id="login-email" required placeholder="votre@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Mot de passe</label>
+                        <input type="password" id="login-password" required placeholder="••••••••">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Se connecter</button>
+                    <div id="login-error" class="error-message"></div>
+                </form>
+
+                <!-- Formulaire d'Inscription -->
+                <form id="signup-form" class="auth-form">
+                    <div class="form-group">
+                        <label for="signup-email">Email</label>
+                        <input type="email" id="signup-email" required placeholder="votre@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-password">Mot de passe</label>
+                        <input type="password" id="signup-password" required placeholder="••••••••">
+                    </div>
+                    <button type="submit" class="btn btn-primary">S'inscrire</button>
+                    <div id="signup-error" class="error-message"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard Principal -->
+    <div id="dashboard-page" class="page">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1>🌍 EcoTrack</h1>
+                <div class="header-actions">
+                    <span id="user-email" class="user-info"></span>
+                    <button id="logout-btn" class="btn btn-secondary">Déconnexion</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="nav-tabs">
+            <button class="nav-btn active" data-view="overview">📊 Vue d'ensemble</button>
+            <button class="nav-btn" data-view="zones">🗺️ Zones</button>
+            <button class="nav-btn" data-view="sources">📡 Sources</button>
+            <button class="nav-btn" data-view="indicators">📈 Indicateurs</button>
+        </nav>
+
+        <!-- Contenu Principal -->
+        <main class="main-content">
+            <!-- Vue d'ensemble -->
+            <div id="overview-view" class="view active">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">🗺️</div>
+                        <div class="stat-info">
+                            <h3 id="zones-count">-</h3>
+                            <p>Zones</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📡</div>
+                        <div class="stat-info">
+                            <h3 id="sources-count">-</h3>
+                            <p>Sources</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📊</div>
+                        <div class="stat-info">
+                            <h3 id="indicators-count">-</h3>
+                            <p>Indicateurs</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="charts-grid">
+                    <div class="chart-container">
+                        <h2>Qualité de l'Air</h2>
+                        <canvas id="air-chart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <h2>Émissions CO₂</h2>
+                        <canvas id="co2-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vue Zones -->
+            <div id="zones-view" class="view">
+                <div class="view-header">
+                    <h2>🗺️ Zones</h2>
+                </div>
+                <div id="zones-list" class="data-grid"></div>
+            </div>
+
+            <!-- Vue Sources -->
+            <div id="sources-view" class="view">
+                <div class="view-header">
+                    <h2>📡 Sources de Données</h2>
+                </div>
+                <div id="sources-list" class="data-grid"></div>
+            </div>
+
+            <!-- Vue Indicateurs -->
+            <div id="indicators-view" class="view">
+                <div class="view-header">
+                    <h2>📈 Indicateurs Environnementaux</h2>
+                    <div class="filters">
+                        <select id="filter-zone" class="filter-select">
+                            <option value="">Toutes les zones</option>
+                        </select>
+                        <select id="filter-type" class="filter-select">
+                            <option value="">Tous les types</option>
+                            <option value="air">Qualité de l'air</option>
+                            <option value="co2">CO₂</option>
+                        </select>
+                        <button id="apply-filters" class="btn btn-primary">Filtrer</button>
+                    </div>
+                </div>
+                <div id="indicators-list" class="data-table-container"></div>
+            </div>
+        </main>
+    </div>
+
+    <script src="/frontend/js/app.js"></script>
+</body>
+
+</html>

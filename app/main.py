@@ -1,4 +1,7 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from app.database import Base
 from app.database import engine
 
@@ -48,6 +51,17 @@ def custom_openapi():
 
 app.openapi = custom_openapi
 
+# Configuration CORS pour le frontend
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # En production, spécifier les origines autorisées
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Monter les fichiers statiques du frontend
+app.mount("/frontend", StaticFiles(directory="frontend"), name="frontend")
 
 app.include_router(auth.router, prefix="/auth", tags=["Auth"])
 app.include_router(users.router, prefix="/users", tags=["Users"])
@@ -58,4 +72,5 @@ app.include_router(stats.router, prefix="/stats", tags=["Stats"])
 
 @app.get("/")
 def index():
-    return {"message": "Bienvenue sur l'API EcoTrack"}
+    """Servir la page d'accueil du frontend"""
+    return FileResponse("frontend/index.html")
