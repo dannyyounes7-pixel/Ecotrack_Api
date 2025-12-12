@@ -31,24 +31,6 @@ def signup(user: UserCreate, db: Session = Depends(get_db)):
     return {"message": "Utilisateur créé avec succès"}
 
 
-@router.post("/signup", status_code=201)
-def signup(user: UserCreate, db: Session = Depends(get_db)):
-    existing = db.query(User).filter(User.email == user.email).first()
-    if existing:
-        raise HTTPException(status_code=400, detail="Email déjà utilisé")
-
-    new_user = User(
-        email=user.email,
-        hashed_password=hash_password(user.password),
-        role="user",
-        is_active=True,
-    )
-    db.add(new_user)
-    db.commit()
-    db.refresh(new_user)
-    return {"message": "Utilisateur créé avec succès"}
-
-
 @router.post("/login")
 def login(user: UserLogin, db: Session = Depends(get_db)):
     db_user = db.query(User).filter(User.email == user.email).first()

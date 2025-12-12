@@ -7,11 +7,17 @@ SECRET_KEY = "CHANGE_ME_SUPER_SECRET"
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 60
 
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+pwd_context = CryptContext(
+    schemes=["bcrypt"],
+    deprecated="auto",
+    bcrypt__truncate_error=False  # Allow bcrypt to truncate passwords > 72 bytes
+)
 
 def hash_password(password: str) -> str:
-    if len(password.encode("utf-8")) > 72:
-        raise ValueError("Mot de passe trop long (max 72 caractères)")
+    # Bcrypt has a 72-byte limit, truncate if needed
+    password_bytes = password.encode("utf-8")
+    if len(password_bytes) > 72:
+        password = password_bytes[:72].decode("utf-8", errors="ignore")
     return pwd_context.hash(password)
 
 
