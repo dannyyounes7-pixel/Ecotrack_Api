@@ -23,7 +23,7 @@ EcoTrack est une plateforme complète pour suivre et analyser les indicateurs en
 - **CRUD Complet** : Gestion des Zones, Sources et Indicateurs.
 - **Endpoints Statistiques** : Calcul de moyennes, tendances et agrégations.
 
-### 📊 Données Réelles
+###  Données Réelles
 - **Qualité de l'Air** : Intégré avec l'API Open-Meteo (PM10, PM2.5, NO2, O3).
 - **Intensité Carbone** : Connecté au réseau RTE (France) pour les émissions CO₂ réelles.
 - **Simulation** : Générateur de données historiques pour les tests de charge.
