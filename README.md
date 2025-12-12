@@ -18,7 +18,7 @@ EcoTrack est une plateforme complète pour suivre et analyser les indicateurs en
 - **Visualisation** : Graphiques interactifs (Chart.js) pour comparer la qualité de l'air et le CO₂.
 - **Filtrage** : Filtrage dynamique par zone (Paris/Lyon), type de donnée et date.
 
-### API RESTful
+### API RESTFUL
 - **Authentification Sécurisée** : JWT (JSON Web Tokens) pour l'accès aux données.
 - **CRUD Complet** : Gestion des Zones, Sources et Indicateurs.
 - **Endpoints Statistiques** : Calcul de moyennes, tendances et agrégations.
