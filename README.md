@@ -13,7 +13,7 @@ EcoTrack est une plateforme complète pour suivre et analyser les indicateurs en
 
 ##  Fonctionnalités
 
-### 🖥️ Dashboard Interactif
+###  Dashboard Interactif
 - **Design Moderne** : Interface "Glassmorphism" avec mode sombre et animations fluides.
 - **Visualisation** : Graphiques interactifs (Chart.js) pour comparer la qualité de l'air et le CO₂.
 - **Filtrage** : Filtrage dynamique par zone (Paris/Lyon), type de donnée et date.
@@ -58,7 +58,7 @@ pip install -r requirements.txt
 
 ---
 
-## 💾 Initialisation des Données
+##  Initialisation des Données
 
 Avant de lancer le serveur, préparez la base de données :
 
@@ -83,7 +83,7 @@ python scripts/generate_co2.py
 
 ---
 
-## ▶️ Démarrage
+##  Démarrage
 
 ### Lancer le serveur
 ```bash
@@ -93,7 +93,7 @@ python scripts/generate_co2.py
 
 ### Accéder à l'application
 Ouvrez votre navigateur et allez sur :
-👉 **http://127.0.0.1:8000**
+**http://127.0.0.1:8000**
 
 ---
 
