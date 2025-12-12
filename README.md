@@ -1,195 +1,139 @@
-EcoTrack API — Projet API (FastAPI + SQLite)
+# 🌍 EcoTrack API & Dashboard
 
-EcoTrack API est une API REST permettant de gérer et analyser des indicateurs environnementaux locaux (qualité de l’air, CO₂, météo…), provenant de différentes sources de données réelles.
+> **Projet de Développement API (FastAPI + SQLite + Frontend Moderne)**
 
-Ce projet a été développé dans le cadre du TP noté de Développement API.
+EcoTrack est une plateforme complète pour suivre et analyser les indicateurs environnementaux locaux (Qualité de l'Air, CO₂, Météo) à Paris et Lyon. Elle combine une API REST performante avec un tableau de bord moderne et interactif.
 
-Fonctionnalités principales
+![Status](https://img.shields.io/badge/Status-Active-success)
+![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.109-009688.svg)
+![Frontend](https://img.shields.io/badge/Frontend-HTML5%2FJS-orange)
 
-Authentification avec JWT (signup / login)
+---
 
-Gestion des utilisateurs (admin et user)
+## 🚀 Fonctionnalités
 
-CRUD complet :
+### 🖥️ Dashboard Interactif
+- **Design Moderne** : Interface "Glassmorphism" avec mode sombre et animations fluides.
+- **Visualisation** : Graphiques interactifs (Chart.js) pour comparer la qualité de l'air et le CO₂.
+- **Filtrage** : Filtrage dynamique par zone (Paris/Lyon), type de donnée et date.
 
-Zones
+### 🔌 API RESTful
+- **Authentification Sécurisée** : JWT (JSON Web Tokens) pour l'accès aux données.
+- **CRUD Complet** : Gestion des Zones, Sources et Indicateurs.
+- **Endpoints Statistiques** : Calcul de moyennes, tendances et agrégations.
 
-Sources de données
+### 📊 Données Réelles
+- **Qualité de l'Air** : Intégré avec l'API Open-Meteo (PM10, PM2.5, NO2, O3).
+- **Intensité Carbone** : Connecté au réseau RTE (France) pour les émissions CO₂ réelles.
+- **Simulation** : Générateur de données historiques pour les tests de charge.
 
-Indicateurs environnementaux
+---
 
-Filtres avancés :
+## 🛠️ Installation
 
-Zone, source, type, dates, tri, pagination
+### 1. Cloner le projet
+```bash
+git clone https://github.com/dannyyounes7-pixel/Ecotrack_Api.git
+cd Ecotrack_Api
+# (Assurez-vous d'être sur la branche 'main')
+```
 
-Endpoints statistiques :
+### 2. Environnement Virtuel
+```bash
+# Création
+python3 -m venv venv
 
-Moyennes (/stats/air/averages)
+# Activation (Linux/Mac)
+source venv/bin/activate
 
-Tendances (/stats/co2/trend)
+# Activation (Windows)
+# venv\Scripts\activate
+```
 
-Scripts :
+### 3. Installer les dépendances
+```bash
+pip install -r requirements.txt
+```
 
-Initialisation BDD (init_db.py)
+---
 
-Ingestion de données externes (ingest_data.py)
+## 💾 Initialisation des Données
 
-Tests automatisés (pytest)
+Avant de lancer le serveur, préparez la base de données :
 
-Technologies utilisées
+**1. Créer les tables et les données de test de base :**
+```bash
+python -m scripts.init_db
+```
 
-FastAPI
+**2. (Optionnel) Récupérer des données réelles :**
+```bash
+# Qualité de l'Air (Open-Meteo - 24h dernières heures)
+python scripts/fetch_openmeteo.py
 
-SQLite + SQLAlchemy
+# CO2 (RTE France - Temps réel)
+python scripts/fetch_rte.py
+```
 
-Pydantic v2
+**3. (Optionnel) Générer un historique complet (30 jours) :**
+```bash
+python scripts/generate_co2.py
+```
 
-JWT (python-jose)
+---
 
-httpx
+## ▶️ Démarrage
 
-pytest
+### Lancer le serveur
+```bash
+./venv/bin/uvicorn app.main:app --reload
+```
+*Le serveur démarrera sur `http://127.0.0.1:8000`*
 
-Installation du projet
+### Accéder à l'application
+Ouvrez votre navigateur et allez sur :
+👉 **http://127.0.0.1:8000**
 
-1. Cloner le dépôt
-   git clone https://github.com/<VOTRE_USERNAME>/Ecotrack_Api.git
-   cd Ecotrack_Api
+---
 
-2. Créer un environnement virtuel
-   python3 -m venv venv
-   source venv/bin/activate
+## 🔑 Compte de Démonstration
 
-3. Installer les dépendances
-   pip install -r requirements.txt
+Vous pouvez créer un compte ou utiliser le compte admin par défaut (si créé via init_db) :
+- **Email** : `admin@ecotrack.com`
+- **Password** : `admin123`
 
-Lancer l’API
-uvicorn app.main:app --reload
+---
 
-Accès à l’API :
-http://127.0.0.1:8000
+## 📂 Structure du Projet
 
-Documentation Swagger :
-http://127.0.0.1:8000/docs
-
-Authentification
-Exemple d’inscription
-POST /auth/signup
-{
-"email": "test@example.com",
-"password": "123456"
-}
-
-Exemple de connexion (renvoie un token)
-POST /auth/login
-{
-"email": "test@example.com",
-"password": "123456"
-}
-
-Utilisation dans Swagger
-
-Dans le bouton "Authorize", entrer :
-
-Bearer VOTRE_TOKEN
-
-Endpoints principaux
-Utilisateurs
-
-POST /auth/signup
-
-POST /auth/login
-
-GET /users/me
-
-GET /users (admin)
-
-PUT /users/{id} (admin)
-
-DELETE /users/{id} (admin)
-
-Zones
-
-POST /zones (admin)
-
-GET /zones
-
-PUT /zones/{id} (admin)
-
-DELETE /zones/{id} (admin)
-
-Sources
-
-POST /sources (admin)
-
-GET /sources
-
-PUT /sources/{id} (admin)
-
-DELETE /sources/{id} (admin)
-
-Indicateurs
-
-POST /indicators (admin)
-
-GET /indicators (filtres : zone_id, source_id, type, from_date, to_date, skip, limit, sort)
-
-PUT /indicators/{id} (admin)
-
-DELETE /indicators/{id} (admin)
-
-Endpoints statistiques
-Moyenne de qualité de l'air
-
-Exemple :
-
-GET /stats/air/averages?from=2025-11-01T00:00:00&to=2025-11-15T23:00:00&zone=1
-
-Tendance CO₂ (daily ou monthly)
-GET /stats/co2/trend?zone=1&period=monthly
-
-Script d’initialisation BDD
-
-Pour remplir la base avec des données de test :
-
-python3 -m scripts.init_db
-
-Ce script crée des zones, des sources et des indicateurs de test.
-
-Script d’ingestion de données externes
-python3 -m scripts.ingest_data
-
-Sources utilisées :
-
-OpenAQ : données de qualité de l’air
-
-Open-Meteo : données météo historiques
-
-Tests
-
-Exécution des tests automatisés :
-
-pytest -q
-
-Structure du projet
+```
 Ecotrack_Api/
-│── app/
-│ ├── main.py
-│ ├── models/
-│ ├── schemas/
-│ ├── routers/
-│ └── core/
-│
-│── scripts/
-│ ├── init_db.py
-│ └── ingest_data.py
-│
-│── tests/
-│ └── test_api.py
-│
-│── ecotrack.db
-│── requirements.txt
-│── README.md
+├── app/                    # Code source Backend (FastAPI)
+│   ├── main.py             # Point d'entrée
+│   ├── routers/            # Routes API (auth, zones, indicators...)
+│   └── models/             # Modèles SQLAlchemy
+├── frontend/               # Code source Frontend
+│   ├── index.html          # Page unique (SPA)
+│   ├── css/                # Styles modernes
+│   └── js/                 # Logique client (Chart.js, Fetch)
+├── scripts/                # Scripts utilitaires
+│   ├── fetch_openmeteo.py  # Ingestion Air Quality
+│   ├── fetch_rte.py        # Ingestion RTE CO2
+│   └── generate_co2.py     # Simulation historique
+├── ecotrack.db             # Base de données SQLite
+└── requirements.txt        # Dépendances Python
+```
 
-Projet réalisé dans le cadre du TP API.
-Développé par : Nawfel chakib Younes
+---
+
+## 📚 Documentation API (Swagger)
+
+Une fois le serveur lancé, la documentation interactive est disponible ici :
+👉 **http://127.0.0.1:8000/docs**
+
+---
+
+## 👤 Auteurs
+
+Développé par **Nawfel chakib Younes** et **Danny Younes** dans le cadre du projet API.
