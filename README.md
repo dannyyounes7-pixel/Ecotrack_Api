@@ -1,4 +1,4 @@
-# 🌍 EcoTrack API & Dashboard
+#  EcoTrack API & Dashboard
 
 > **Projet de Développement API (FastAPI + SQLite + Frontend Moderne)**
 
@@ -11,14 +11,14 @@ EcoTrack est une plateforme complète pour suivre et analyser les indicateurs en
 
 ---
 
-## 🚀 Fonctionnalités
+##  Fonctionnalités
 
 ### 🖥️ Dashboard Interactif
 - **Design Moderne** : Interface "Glassmorphism" avec mode sombre et animations fluides.
 - **Visualisation** : Graphiques interactifs (Chart.js) pour comparer la qualité de l'air et le CO₂.
 - **Filtrage** : Filtrage dynamique par zone (Paris/Lyon), type de donnée et date.
 
-### 🔌 API RESTful
+### API RESTful
 - **Authentification Sécurisée** : JWT (JSON Web Tokens) pour l'accès aux données.
 - **CRUD Complet** : Gestion des Zones, Sources et Indicateurs.
 - **Endpoints Statistiques** : Calcul de moyennes, tendances et agrégations.
@@ -30,7 +30,7 @@ EcoTrack est une plateforme complète pour suivre et analyser les indicateurs en
 
 ---
 
-## 🛠️ Installation
+##  Installation
 
 ### 1. Cloner le projet
 ```bash
@@ -97,7 +97,7 @@ Ouvrez votre navigateur et allez sur :
 
 ---
 
-## 🔑 Compte de Démonstration
+## Compte de Démonstration
 
 Vous pouvez créer un compte ou utiliser le compte admin par défaut (si créé via init_db) :
 - **Email** : `admin@ecotrack.com`
@@ -105,7 +105,7 @@ Vous pouvez créer un compte ou utiliser le compte admin par défaut (si créé 
 
 ---
 
-## 📂 Structure du Projet
+##  Structure du Projet
 
 ```
 Ecotrack_Api/
@@ -127,13 +127,13 @@ Ecotrack_Api/
 
 ---
 
-## 📚 Documentation API (Swagger)
+## Documentation API (Swagger)
 
 Une fois le serveur lancé, la documentation interactive est disponible ici :
-👉 **http://127.0.0.1:8000/docs**
+ **http://127.0.0.1:8000/docs**
 
 ---
 
-## 👤 Auteurs
+## Auteurs
 
-Développé par **Nawfel chakib Younes** et **Danny Younes** dans le cadre du projet API.
+Développé par **Nawfel chakib Younes**  dans le cadre du projet API.
